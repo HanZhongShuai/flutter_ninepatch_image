@@ -1,20 +1,26 @@
 name: flutter_ninepatch_image
-description: "A new Flutter package project."
+description: "ninepatch image for Flutter"
 version: 0.0.1
-homepage:
+homepage: https://github.com/HanZhongShuai/flutter_ninepatch_image
+topics:
+  - ninepatch
+  - nine
+  - image
+  - ninepatch-image
 
 environment:
-  sdk: ^3.7.2
-  flutter: ">=1.17.0"
+  sdk: '>=3.2.0 <4.0.0'
 
 dependencies:
+  cached_network_image: ^3.4.1
   flutter:
     sdk: flutter
+  image_pixels: ^3.0.2
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^5.0.0
+  flutter_lints:
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

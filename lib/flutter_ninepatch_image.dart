@@ -1,5 +1,5 @@
-/// A Calculator.
-class Calculator {
-  /// Returns [value] plus 1.
-  int addOne(int value) => value + 1;
-}
+library flutter_ninepatch_image;
+
+export 'src/ninepatch_image.dart';
+export 'src/ninepatch_cache.dart';
+export 'src/ninepatch_info.dart';
