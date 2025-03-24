@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:image_pixels/image_pixels.dart';
 
@@ -19,19 +18,20 @@ class NinePatchImage extends StatelessWidget {
   final ImageProvider imageProvider;
   final Widget child;
   final NinePatchDefaultWidgetBuilder? defaultBuilder;
-  final String? _cachedKey;
+  final String? cachedKey;
 
   const NinePatchImage({
     super.key,
     required this.imageProvider,
     required this.child,
+    this.cachedKey,
     this.defaultBuilder,
     this.alignment,
     this.scale = 1.0,
     this.color,
     this.borderRadius,
     this.hideLines = true,
-  }) : _cachedKey = null;
+  });
 
   NinePatchImage.asset({
     super.key,
@@ -44,7 +44,7 @@ class NinePatchImage extends StatelessWidget {
     this.borderRadius,
     this.hideLines = true,
   })  : imageProvider = AssetImage(name),
-        _cachedKey = name;
+        cachedKey = name;
 
   NinePatchImage.file({
     super.key,
@@ -57,7 +57,7 @@ class NinePatchImage extends StatelessWidget {
     this.borderRadius,
     this.hideLines = true,
   })  : imageProvider = FileImage(file),
-        _cachedKey = file.path;
+        cachedKey = file.path;
 
   NinePatchImage.network({
     super.key,
@@ -69,8 +69,8 @@ class NinePatchImage extends StatelessWidget {
     this.color,
     this.borderRadius,
     this.hideLines = true,
-  })  : imageProvider = CachedNetworkImageProvider(url),
-        _cachedKey = url;
+  })  : imageProvider = NetworkImage(url),
+        cachedKey = url;
 
   EdgeInsets _padding(
       int rightTop, int leftTop, Size size, int rightBottom, int leftBottom) {
@@ -85,7 +85,7 @@ class NinePatchImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final config = NinepatchCache.instance.get(key: _cachedKey);
+    final config = NinepatchCache.instance.get(key: cachedKey);
     if (config != null) {
       return _getContent(context, config);
     } else {
@@ -194,7 +194,7 @@ class NinePatchImage extends StatelessWidget {
             scale: scale,
           );
           NinepatchCache.instance.add(
-            key: _cachedKey,
+            key: cachedKey,
             value: info,
           );
           return _getContent(context, info);

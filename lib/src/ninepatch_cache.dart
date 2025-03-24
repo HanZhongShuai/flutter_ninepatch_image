@@ -21,4 +21,16 @@ class NinepatchCache {
       _cache[key] = value;
     }
   }
+
+  NinepatchInfo? remove({required String? key}) {
+    if (key != null && key.isNotEmpty) {
+      return _cache.remove(key);
+    } else {
+      return null;
+    }
+  }
+
+  void removeAll({required String? key}) {
+    _cache.clear();
+  }
 }
