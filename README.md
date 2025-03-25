@@ -4,11 +4,6 @@
 
 TODO: flutter .9 image
 
-## Getting started
-
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
-
 ## Usage
 
 ```yaml
