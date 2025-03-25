@@ -18,13 +18,13 @@ class NinePatchImage extends StatelessWidget {
   final ImageProvider imageProvider;
   final Widget child;
   final NinePatchDefaultWidgetBuilder? defaultBuilder;
-  final String? cachedKey;
+  final String? sliceCachedKey;
 
   const NinePatchImage({
     super.key,
     required this.imageProvider,
     required this.child,
-    this.cachedKey,
+    this.sliceCachedKey,
     this.defaultBuilder,
     this.alignment,
     this.scale = 1.0,
@@ -44,7 +44,7 @@ class NinePatchImage extends StatelessWidget {
     this.borderRadius,
     this.hideLines = true,
   })  : imageProvider = AssetImage(name),
-        cachedKey = name;
+        sliceCachedKey = name;
 
   NinePatchImage.file({
     super.key,
@@ -57,7 +57,7 @@ class NinePatchImage extends StatelessWidget {
     this.borderRadius,
     this.hideLines = true,
   })  : imageProvider = FileImage(file),
-        cachedKey = file.path;
+        sliceCachedKey = file.path;
 
   NinePatchImage.network({
     super.key,
@@ -70,7 +70,7 @@ class NinePatchImage extends StatelessWidget {
     this.borderRadius,
     this.hideLines = true,
   })  : imageProvider = NetworkImage(url),
-        cachedKey = url;
+        sliceCachedKey = url;
 
   EdgeInsets _padding(
       int rightTop, int leftTop, Size size, int rightBottom, int leftBottom) {
@@ -85,7 +85,7 @@ class NinePatchImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final config = NinepatchCache.instance.get(key: cachedKey);
+    final config = NinepatchCache.instance.get(key: sliceCachedKey);
     if (config != null) {
       return _getContent(context, config);
     } else {
@@ -188,13 +188,14 @@ class NinePatchImage extends StatelessWidget {
           final centerSlice = Rect.fromLTRB(top1.toDouble(), left1.toDouble(),
               top2.toDouble(), left2.toDouble());
           final info = NinepatchInfo(
+            width: width,
+            height: height,
             pading: pading,
             constraints: constraints,
             centerSlice: centerSlice,
-            scale: scale,
           );
           NinepatchCache.instance.add(
-            key: cachedKey,
+            key: sliceCachedKey,
             value: info,
           );
           return _getContent(context, info);
@@ -209,8 +210,8 @@ class NinePatchImage extends StatelessWidget {
         clipper: _BlackLineClipper(hideLines: hideLines),
         child: IntrinsicWidth(
           child: Container(
-            padding: info.pading / info.scale,
-            constraints: info.constraints / info.scale,
+            padding: info.pading / scale,
+            constraints: info.constraints / scale,
             decoration: BoxDecoration(
               color: color,
               borderRadius: borderRadius,
@@ -218,11 +219,11 @@ class NinePatchImage extends StatelessWidget {
                 image: imageProvider,
                 // fit: BoxFit.fill,
                 centerSlice: Rect.fromLTRB(
-                    info.centerSlice.left / info.scale,
-                    info.centerSlice.top / info.scale,
-                    info.centerSlice.right / info.scale,
-                    info.centerSlice.bottom / info.scale),
-                scale: info.scale,
+                    info.centerSlice.left / scale,
+                    info.centerSlice.top / scale,
+                    info.centerSlice.right / scale,
+                    info.centerSlice.bottom / scale),
+                scale: scale,
               ),
             ),
             alignment: alignment,

@@ -27,6 +27,7 @@ class MyHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final assetName = 'assets/test_ninepatch.9.png';
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
@@ -39,8 +40,8 @@ class MyHomePage extends StatelessWidget {
           children: <Widget>[
             Spacer(),
             NinePatchImage(
-              imageProvider: AssetImage('assets/test_ninepatch.9.png'),
-              cachedKey: 'assets/test_ninepatch.9.png',
+              imageProvider: AssetImage(assetName),
+              sliceCachedKey: assetName,
               scale: 3.0,
               alignment: Alignment.center,
               child: Text(
@@ -52,7 +53,7 @@ class MyHomePage extends StatelessWidget {
               ),
             ),
             NinePatchImage.asset(
-              name: 'assets/test_ninepatch.9.png',
+              name: assetName,
               scale: 3.0,
               alignment: Alignment.center,
               child: Text(
@@ -64,7 +65,19 @@ class MyHomePage extends StatelessWidget {
               ),
             ),
             NinePatchImage.asset(
-              name: 'assets/test_ninepatch.9.png',
+              name: assetName,
+              scale: 3.0,
+              alignment: Alignment.center,
+              child: Text(
+                'test\ntest\ntest\ntest',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 16,
+                ),
+              ),
+            ),
+            NinePatchImage.asset(
+              name: assetName,
               scale: 3.0,
               alignment: Alignment.center,
               child: Text(
@@ -76,7 +89,7 @@ class MyHomePage extends StatelessWidget {
               ),
             ),
             NinePatchImage.asset(
-              name: 'assets/test_ninepatch.9.png',
+              name: assetName,
               alignment: Alignment.center,
               child: Text(
                 'test test test test test test test test test test test test test test test test test test test test',
