@@ -1,6 +1,3 @@
-import 'dart:io' show File;
-
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:image_pixels/image_pixels.dart';
 
@@ -68,25 +65,6 @@ class NinePatchImage extends StatelessWidget {
     this.hideLines = true,
   })  : imageProvider = AssetImage(name),
         sliceCachedKey = name;
-
-  /// file initialize method
-  NinePatchImage.file({
-    super.key,
-    required File file,
-    required this.child,
-    this.defaultBuilder,
-    this.alignment,
-    this.scale = 1.0,
-    this.color,
-    this.borderRadius,
-    this.hideLines = true,
-  })  : assert(
-          !kIsWeb,
-          'Image.file is not supported on Flutter Web. '
-          'Consider using either Image.asset or Image.network instead.',
-        ),
-        imageProvider = FileImage(file),
-        sliceCachedKey = file.path;
 
   /// network initialize method
   NinePatchImage.network({

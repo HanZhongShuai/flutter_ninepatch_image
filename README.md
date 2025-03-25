@@ -8,7 +8,7 @@ TODO: flutter .9 image
 
 ```yaml
 dependencies:
-  flutter_ninepatch_image: ^0.0.3
+  flutter_ninepatch_image: ^1.0.0
 ```
 
 ```dart
