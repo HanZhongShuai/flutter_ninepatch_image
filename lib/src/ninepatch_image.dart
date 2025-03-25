@@ -72,17 +72,6 @@ class NinePatchImage extends StatelessWidget {
   })  : imageProvider = NetworkImage(url),
         sliceCachedKey = url;
 
-  EdgeInsets _padding(
-      int rightTop, int leftTop, Size size, int rightBottom, int leftBottom) {
-    final padding = EdgeInsets.fromLTRB(
-        rightTop.toDouble(),
-        leftTop.toDouble(),
-        size.width - rightBottom.toDouble(),
-        size.height - leftBottom.toDouble());
-
-    return padding.isNonNegative ? padding : EdgeInsets.zero;
-  }
-
   @override
   Widget build(BuildContext context) {
     final config = NinepatchCache.instance.get(key: sliceCachedKey);
@@ -179,8 +168,11 @@ class NinePatchImage extends StatelessWidget {
           if (bottom1 == -1) bottom1 = 0;
           if (bottom2 == -1) bottom2 = width;
 
-          final pading = _padding(bottom1, right1,
-              Size(width.toDouble(), height.toDouble()), bottom2, right2);
+          final padding = EdgeInsets.fromLTRB(
+              bottom1.toDouble(),
+              right1.toDouble(),
+              width - bottom2.toDouble(),
+              height - right2.toDouble());
           final constraints = BoxConstraints(
             minWidth: (width - (top2 - top1)).toDouble() + topOffset,
             minHeight: (height - (left2 - left1)).toDouble() + leftOffset,
@@ -190,7 +182,7 @@ class NinePatchImage extends StatelessWidget {
           final info = NinepatchInfo(
             width: width,
             height: height,
-            pading: pading,
+            padding: padding.isNonNegative ? padding : EdgeInsets.zero,
             constraints: constraints,
             centerSlice: centerSlice,
           );
@@ -207,10 +199,10 @@ class NinePatchImage extends StatelessWidget {
   Widget _getContent(BuildContext context, NinepatchInfo? info) {
     if (info != null) {
       return ClipPath(
-        clipper: _BlackLineClipper(hideLines: hideLines),
+        clipper: _BlackLineClipper(hideLines: hideLines, scale: scale),
         child: IntrinsicWidth(
           child: Container(
-            padding: info.pading / scale,
+            padding: info.padding / scale,
             constraints: info.constraints / scale,
             decoration: BoxDecoration(
               color: color,
@@ -239,13 +231,17 @@ class NinePatchImage extends StatelessWidget {
 
 class _BlackLineClipper extends CustomClipper<Path> {
   final bool hideLines;
+  final double scale;
 
-  _BlackLineClipper({required this.hideLines});
+  _BlackLineClipper({
+    required this.hideLines,
+    required this.scale,
+  });
 
   @override
   Path getClip(Size size) {
     final path = Path();
-    double x = hideLines ? 2 : 0;
+    double x = hideLines ? 2 / scale : 0;
     path.moveTo(x, x);
     path.lineTo(x, size.height - x);
     path.lineTo(size.width - x, size.height - x);
