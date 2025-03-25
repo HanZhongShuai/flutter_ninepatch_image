@@ -16,7 +16,7 @@ start using the package.
 
 ```yaml
 dependencies:
-  flutter_ninepatch_image: ^0.0.1
+  flutter_ninepatch_image: ^0.0.3
 ```
 
 ```dart
