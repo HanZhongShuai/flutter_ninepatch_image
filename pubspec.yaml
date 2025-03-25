@@ -7,6 +7,8 @@ topics:
   - nine
   - image
   - ninepatch-image
+  - nine-slicing
+  - slicing
 
 environment:
   sdk: '>=3.2.0 <4.0.0'
