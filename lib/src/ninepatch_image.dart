@@ -18,13 +18,15 @@ class NinePatchImage extends StatelessWidget {
   final ImageProvider imageProvider;
   final Widget child;
   final NinePatchDefaultWidgetBuilder? defaultBuilder;
-  final String? sliceCachedKey;
+
+  /// unique cache key
+  final String sliceCachedKey;
 
   const NinePatchImage({
     super.key,
     required this.imageProvider,
     required this.child,
-    this.sliceCachedKey,
+    required this.sliceCachedKey,
     this.defaultBuilder,
     this.alignment,
     this.scale = 1.0,
