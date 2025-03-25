@@ -20,8 +20,10 @@ dependencies:
 ```
 
 ```dart
-NinePatchImage.asset(
-    name: 'assets/test_ninepatch.9.png',
+final assetName = 'assets/test_ninepatch.9.png';
+NinePatchImage(
+    imageProvider: AssetImage(assetName),
+    sliceCachedKey: assetName,
     scale: 3.0,
     alignment: Alignment.center,
     child: Text(

@@ -1,27 +1,47 @@
-import 'dart:io';
+import 'dart:io' show File;
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:image_pixels/image_pixels.dart';
 
 import 'ninepatch_cache.dart';
 import 'ninepatch_info.dart';
 
+/// Default Widget Builder
 typedef NinePatchDefaultWidgetBuilder = Widget Function(
     BuildContext context, Widget child);
 
+/// Nine Patch Image Widget
 class NinePatchImage extends StatelessWidget {
+  /// hide black lines, default true
   final bool hideLines;
+
+  /// [Container] alignment
   final AlignmentGeometry? alignment;
+
+  /// [Container] scale
   final double scale;
+
+  /// [Container] color
   final Color? color;
+
+  /// [Container] borderRadius
   final BorderRadius? borderRadius;
+
+  /// image provider
   final ImageProvider imageProvider;
+
+  /// child Widget
   final Widget child;
+
+  /// default builder widget, contain child,
+  /// for loading image and calculated image size show widget
   final NinePatchDefaultWidgetBuilder? defaultBuilder;
 
   /// unique cache key
   final String sliceCachedKey;
 
+  /// defaule initialize method
   const NinePatchImage({
     super.key,
     required this.imageProvider,
@@ -35,6 +55,7 @@ class NinePatchImage extends StatelessWidget {
     this.hideLines = true,
   });
 
+  /// asset initialize method
   NinePatchImage.asset({
     super.key,
     required String name,
@@ -48,6 +69,7 @@ class NinePatchImage extends StatelessWidget {
   })  : imageProvider = AssetImage(name),
         sliceCachedKey = name;
 
+  /// file initialize method
   NinePatchImage.file({
     super.key,
     required File file,
@@ -58,9 +80,15 @@ class NinePatchImage extends StatelessWidget {
     this.color,
     this.borderRadius,
     this.hideLines = true,
-  })  : imageProvider = FileImage(file),
+  })  : assert(
+          !kIsWeb,
+          'Image.file is not supported on Flutter Web. '
+          'Consider using either Image.asset or Image.network instead.',
+        ),
+        imageProvider = FileImage(file),
         sliceCachedKey = file.path;
 
+  /// network initialize method
   NinePatchImage.network({
     super.key,
     required String url,
