@@ -4,6 +4,9 @@
 
 TODO: flutter .9 image
 
+**Screenshot** :   
+![Screenshot](https://github.com/HanZhongShuai/flutter_ninepatch_image/blob/main/screenshot/screenshot1.png?raw=true)
+
 ## Getting started
 
 TODO: List prerequisites and provide or point to information on how to
