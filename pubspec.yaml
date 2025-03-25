@@ -1,6 +1,6 @@
 name: flutter_ninepatch_image
 description: "ninepatch image for Flutter. support image scale, can super 2x and 3x images."
-version: 1.0.0
+version: 1.0.1
 homepage: https://github.com/HanZhongShuai/flutter_ninepatch_image
 topics:
   - ninepatch
