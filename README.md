@@ -1,4 +1,7 @@
-
+[![Pub Version](https://img.shields.io/pub/v/flutter_ninepatch_image?style=flat-square&logo=dart)](https://pub.dev/packages/flutter_ninepatch_image)
+[![GitHub stars](https://img.shields.io/github/stars/hanzhongshuai/flutter_ninepatch_image?style=social)](https://github.com/hanzhongshuai/flutter_ninepatch_image)
+![GitHub repo size](https://img.shields.io/github/repo-size/hanzhongshuai/flutter_ninepatch_image?style=flat-square)
+[![Platforms](https://badgen.net/pub/flutter-platform/flutter_ninepatch_image)](https://pub.dev/packages/flutter_ninepatch_image)
 
 # ninepatch image for Flutter
 
