@@ -151,18 +151,6 @@ class NinePatchImage extends StatelessWidget {
               }
             }
           }
-          double leftOffset = 1;
-          double topOffset = 1;
-          if (left1 == left2) {
-            left2 = left1 + 1;
-            leftOffset = leftOffset + 1;
-          }
-          if (top1 == top2) {
-            top2 = top1 + 1;
-            topOffset = topOffset + 1;
-          }
-          if (right1 == right2) right2 = right1 + 1;
-          if (bottom1 == bottom2) bottom2 = bottom1 + 1;
 
           if (left1 == -1) left1 = 0;
           if (left2 == -1) left2 = height;
@@ -175,6 +163,19 @@ class NinePatchImage extends StatelessWidget {
 
           if (bottom1 == -1) bottom1 = 0;
           if (bottom2 == -1) bottom2 = width;
+
+          double leftOffset = 1;
+          double topOffset = 1;
+          if (left1 == left2) {
+            left2 = left1 + 1;
+            leftOffset = leftOffset + 1;
+          }
+          if (top1 == top2) {
+            top2 = top1 + 1;
+            topOffset = topOffset + 1;
+          }
+          if (right1 == right2) right2 = right1 + 1;
+          if (bottom1 == bottom2) bottom2 = bottom1 + 1;
 
           final padding = EdgeInsets.fromLTRB(
               bottom1.toDouble(),
